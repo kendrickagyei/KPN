@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1c0b32">
+  <meta name="description" content="King Priest Nation announcement administration.">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin | King Priest Nation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <a class="admin-brand" href="index.html">
+      <img src="logo.png" alt="" width="48" height="44">
+      <span>King Priest Nation</span>
+    </a>
+
+    <section class="admin-panel" id="login-panel" aria-labelledby="login-title">
+      <p class="admin-eyebrow">Secure area</p>
+      <h1 id="login-title">Admin sign in</h1>
+      <p class="admin-lead">Sign in to manage public announcements.</p>
+      <form id="login-form">
+        <label for="login-email">Email address</label>
+        <input id="login-email" name="email" type="email" autocomplete="username" required>
+        <label for="login-password">Password</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="admin-button admin-button-primary" type="submit">Sign in</button>
+      </form>
+      <button class="admin-text-button" id="reset-password" type="button">Send password reset email</button>
+      <p class="admin-status" id="login-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="admin-panel admin-dashboard" id="dashboard" aria-labelledby="dashboard-title" hidden>
+      <div class="dashboard-heading">
+        <div>
+          <p class="admin-eyebrow">Content management</p>
+          <h1 id="dashboard-title">Announcements</h1>
+          <p class="admin-lead">Create an update, save it as a draft, or publish it to the website.</p>
+        </div>
+        <button class="admin-button admin-button-secondary" id="sign-out" type="button">Sign out</button>
+      </div>
+
+      <form class="announcement-form" id="announcement-form">
+        <input id="announcement-id" name="id" type="hidden">
+        <label for="announcement-title">Title</label>
+        <input id="announcement-title" name="title" type="text" maxlength="100" required>
+        <label for="announcement-body">Announcement</label>
+        <textarea id="announcement-body" name="body" rows="6" maxlength="2000" required></textarea>
+        <label class="publish-toggle" for="announcement-published">
+          <input id="announcement-published" name="published" type="checkbox" checked>
+          <span>Publish this announcement on the website</span>
+        </label>
+        <div class="form-actions">
+          <button class="admin-button admin-button-primary" id="save-announcement" type="submit">Publish announcement</button>
+          <button class="admin-button admin-button-secondary" id="cancel-edit" type="button" hidden>Cancel edit</button>
+        </div>
+        <p class="admin-status" id="editor-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="admin-list-heading">
+        <h2>Saved announcements</h2>
+        <span id="announcement-count"></span>
+      </div>
+      <div class="admin-announcement-list" id="admin-announcement-list" aria-live="polite">
+        <p class="admin-empty">Loading announcements…</p>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

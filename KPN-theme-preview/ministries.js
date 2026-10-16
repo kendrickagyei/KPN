@@ -1,5 +1,5 @@
 mountComponent('ministries-component', `
-  <section class="section ministries-section" id="announcements">
+  <section class="section ministries-section" id="ministries">
     <div class="ministry-copy">
       <p class="eyebrow eyebrow-dark"><span></span> Find your people</p>
       <h2>Faith grows<br><em>in community.</em></h2>

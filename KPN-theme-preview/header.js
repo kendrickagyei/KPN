@@ -15,7 +15,8 @@ mountComponent('header-component', `
           <li><a href="#watch">Watch live</a></li>
           <li><a href="#sermons">Sermons</a></li>
           <li><a href="#events">Events</a></li>
-          <li><a href="#announcements">Ministries</a></li>
+          <li><a href="#announcements">Announcements</a></li>
+          <li><a href="#ministries">Ministries</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#give">Give</a></li>
           <li><a href="#contact">Contact</a></li>

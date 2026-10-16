@@ -11,6 +11,7 @@ mountComponent('footer-component', `
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> King Priest Nation</span>
       <span>Faith · Worship · Purpose</span>
+      <a class="footer-link" href="admin.html">Admin sign-in</a>
     </div>
   </footer>
 `);

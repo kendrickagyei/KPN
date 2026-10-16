@@ -1,0 +1,37 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid == "REPLACE_WITH_ADMIN_UID";
+    }
+
+    function validAnnouncement(data) {
+      return data.keys().hasAll(["title", "body", "published", "createdAt", "updatedAt"])
+        && data.keys().hasOnly(["title", "body", "published", "createdAt", "updatedAt"])
+        && data.title is string
+        && data.title.size() > 0
+        && data.title.size() <= 100
+        && data.body is string
+        && data.body.size() > 0
+        && data.body.size() <= 2000
+        && data.published is bool
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp;
+    }
+
+    match /announcements/{announcementId} {
+      allow read: if isAdmin() || resource.data.published == true;
+      allow create: if isAdmin()
+        && validAnnouncement(request.resource.data)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+      allow update: if isAdmin()
+        && validAnnouncement(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if isAdmin();
+    }
+  }
+}
