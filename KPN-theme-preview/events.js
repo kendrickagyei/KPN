@@ -24,8 +24,11 @@ mountComponent("events-component", `
 `);
 
 const eventList = document.getElementById("public-event-list");
+let latestSnapshot;
+let expiryTimer;
 
 function showEventState(message) {
+  clearTimeout(expiryTimer);
   const state = document.createElement("p");
   state.className = "public-event-state";
   state.textContent = message;
@@ -49,6 +52,9 @@ function getHttpsUrl(value) {
 }
 
 function renderEvents(snapshot) {
+  latestSnapshot = snapshot;
+  clearTimeout(expiryTimer);
+
   const now = Date.now();
   const events = snapshot.docs
     .map((item) => ({ id: item.id, ...item.data() }))
@@ -59,6 +65,12 @@ function renderEvents(snapshot) {
     showEventState("No upcoming events are scheduled right now. Please check back soon.");
     return;
   }
+
+  const nextExpiry = getEventDate(events[0]).getTime() - now;
+  expiryTimer = window.setTimeout(
+    () => renderEvents(latestSnapshot),
+    Math.min(nextExpiry + 1, 2_147_483_647)
+  );
 
   const cards = events.map((event) => {
     const article = document.createElement("article");
@@ -106,6 +118,12 @@ function renderEvents(snapshot) {
 
   eventList.replaceChildren(...cards);
 }
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && latestSnapshot) {
+    renderEvents(latestSnapshot);
+  }
+});
 
 if (!isFirebaseConfigured()) {
   showEventState("Upcoming events will appear here once admin access is configured.");

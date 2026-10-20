@@ -10,7 +10,17 @@ The KPN website is a static HTML, CSS, and JavaScript site with Firebase Authent
 - [Announcements](./KPN-theme-preview/announcements.html) — published community updates
 - [Admin sign-in](./KPN-theme-preview/admin.html) — private content management page
 
-Serve the `KPN-theme-preview` directory over HTTP or HTTPS. Firebase modules do not work from a `file://` URL. For a static host, configure `KPN-theme-preview` as the site root.
+Serve the `KPN-theme-preview` directory over HTTP or HTTPS. Firebase modules do not work from a `file://` URL. For Firebase Hosting, the configured public directory is `KPN-theme-preview`.
+
+To deploy from the site directory, install and sign in to the Firebase CLI, then run:
+
+```sh
+npm install -g firebase-tools
+firebase login
+firebase deploy --only hosting,firestore:rules
+```
+
+Check the selected Firebase project before deployment. After deploying, add the Firebase Hosting domain and any custom domain to Firebase Authentication's authorized domains.
 
 ## Admin content
 
