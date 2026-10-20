@@ -9,7 +9,7 @@ mountComponent('hero-component', `
           Welcome to King Priest Nation — a place to grow in faith, encounter God, and walk out your calling together.
         </p>
         <div class="hero-actions">
-          <a class="btn-gradient" href="#sermons">Explore sermons <span aria-hidden="true">↗</span></a>
+          <a class="btn-gradient" href="sermons.html">Explore sermons <span aria-hidden="true">↗</span></a>
           <a class="text-link" href="#about">Discover our heart <span aria-hidden="true">→</span></a>
         </div>
         <div class="hero-note">
@@ -36,6 +36,6 @@ mountComponent('hero-component', `
         <span class="hero-orbit hero-orbit-two" aria-hidden="true"></span>
       </div>
     </div>
-    <a class="scroll-cue" href="#sermons"><span></span> Scroll to explore</a>
+    <a class="scroll-cue" href="sermons.html"><span></span> Explore sermons</a>
   </section>
 `);

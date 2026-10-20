@@ -429,6 +429,24 @@ ul { list-style: none; }
 .announcement-card h3 { color: var(--purple-900); font-family: "Cinzel", Georgia, serif; font-size: 1.07rem; line-height: 1.4; }
 .announcement-body { margin-top: 12px; color: var(--muted); font-size: .76rem; white-space: pre-wrap; overflow-wrap: anywhere; }
 .announcement-state { grid-column: 1 / -1; padding: 26px; border: 1px solid rgba(53, 32, 78, .1); color: var(--muted); font-size: .8rem; text-align: center; }
+.content-page { min-height: 65vh; background: var(--cream); }
+.home-content-links { background: #fff; color: var(--ink); }
+.content-link-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.content-link-card {
+  position: relative;
+  min-height: 220px;
+  padding: 27px 25px;
+  border: 1px solid rgba(53, 32, 78, .13);
+  border-top: 3px solid var(--gold);
+  background: #faf8f4;
+  color: var(--ink);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.content-link-card:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(32, 22, 39, .08); }
+.content-link-number { color: #806333; font-size: .58rem; font-weight: 600; letter-spacing: .14em; }
+.content-link-card h3 { margin-top: 21px; color: var(--purple-900); font-family: "Cinzel", Georgia, serif; font-size: 1.4rem; }
+.content-link-card p { max-width: 280px; margin-top: 8px; color: var(--muted); font-size: .76rem; }
+.content-link-arrow { position: absolute; right: 22px; bottom: 18px; color: #98742e; font-size: 1.1rem; }
 
 .section { padding: 105px max(40px, calc((100% - 1160px) / 2)); }
 .sermons-section { background: #fff; color: var(--ink); }
@@ -469,6 +487,7 @@ ul { list-style: none; }
 .section-heading-light h2 { color: var(--cream); }
 .section-heading-light .section-intro { color: rgba(250, 247, 242, .62); }
 .gathering-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 18px; }
+.event-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .gathering-card {
   position: relative;
   min-height: 315px;
@@ -482,6 +501,17 @@ ul { list-style: none; }
 .gathering-overlay { position: absolute; z-index: 1; right: 23px; bottom: 22px; left: 23px; }
 .gathering-overlay .content-label { color: var(--gold-light); }
 .gathering-overlay h3 { margin-top: 5px; font-family: "Cinzel", Georgia, serif; font-size: 1.12rem; font-weight: 600; }
+.event-card { min-height: 290px; padding: 26px; border: 1px solid rgba(226, 196, 122, .4); background: linear-gradient(145deg, var(--purple-800), var(--purple-950)); }
+.event-card::after { display: none; }
+.event-card:hover { transform: translateY(-3px); }
+.event-card-content { position: relative; z-index: 1; display: flex; height: 100%; flex-direction: column; }
+.event-card-date { color: var(--gold-light); font-size: .64rem; font-weight: 500; letter-spacing: .04em; }
+.event-card h3 { margin-top: 14px; color: var(--cream); font-family: "Cinzel", Georgia, serif; font-size: 1.22rem; line-height: 1.4; }
+.event-card-description { margin-top: 10px; color: rgba(250, 247, 242, .72); font-size: .75rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.event-card-location { margin-top: 13px; color: rgba(250, 247, 242, .58); font-size: .67rem; }
+.event-card-link { align-self: flex-start; margin-top: auto; padding-top: 18px; color: var(--gold-light); font-size: .7rem; font-weight: 600; }
+.event-card-link:hover { color: #fff; }
+.public-event-state { grid-column: 1 / -1; padding: 28px; border: 1px solid rgba(226, 196, 122, .28); color: rgba(250, 247, 242, .75); font-size: .8rem; text-align: center; }
 
 .ministries-section {
   display: grid;
@@ -605,6 +635,7 @@ ul { list-style: none; }
   .hero-seal span { font-size: 1.45rem; }
   .section { padding: 82px 32px; }
   .gathering-grid { grid-template-columns: repeat(2, 1fr); }
+  .event-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gathering-card-feature { grid-column: span 2; min-height: 280px; }
   .gathering-card-feature img { min-height: 280px; }
   .give-section, .site-footer { padding-right: 32px; padding-left: 32px; }
@@ -645,12 +676,15 @@ ul { list-style: none; }
   .announcements-heading .section-intro { max-width: 440px; font-size: .78rem; }
   .announcement-list { grid-template-columns: 1fr; gap: 12px; }
   .announcement-card { min-height: 0; padding: 22px 19px; }
+  .content-link-grid { grid-template-columns: 1fr; gap: 12px; }
+  .content-link-card { min-height: 180px; padding: 22px 19px; }
   .section h2, .ministry-copy h2 { font-size: clamp(2rem, 9vw, 2.8rem); }
   .section-intro { max-width: 440px; font-size: .78rem; }
   .sermon-feature { grid-template-columns: 1fr; }
   .sermon-image, .sermon-image img { min-height: 230px; max-height: 300px; }
   .sermon-copy { padding: 30px 25px 33px; }
   .gathering-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .event-list { grid-template-columns: 1fr; }
   .gathering-card, .gathering-card img { min-height: 230px; }
   .gathering-card-feature { grid-column: span 2; min-height: 260px; }
   .gathering-card-feature img { min-height: 260px; }

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://www.googleapis.com https://apis.google.com https://www.recaptcha.net https://www.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com; frame-src https://www.google.com https://www.recaptcha.net; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1c0b32">
   <meta name="description" content="King Priest Nation: a community rooted in faith, worship, and the Word.">
@@ -17,9 +18,35 @@
   <main>
     <div id="hero-component"></div>
     <div id="welcome-component"></div>
-    <div id="sermons-component"></div>
-    <div id="events-component"></div>
-    <div id="announcements-component"></div>
+    <section class="section home-content-links" aria-labelledby="content-links-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow eyebrow-dark"><span></span> Stay connected</p>
+          <h2 id="content-links-title">Explore life at <em>KPN.</em></h2>
+        </div>
+        <p class="section-intro">Find the latest updates, upcoming gatherings, and messages to encourage your faith.</p>
+      </div>
+      <div class="content-link-grid">
+        <a class="content-link-card" href="sermons.html">
+          <span class="content-link-number">01 / LISTEN</span>
+          <h3>Sermons</h3>
+          <p>Watch and listen to teaching from King Priest Nation.</p>
+          <span class="content-link-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="content-link-card" href="events.html">
+          <span class="content-link-number">02 / GATHER</span>
+          <h3>Events</h3>
+          <p>See what’s coming up and find details for joining us.</p>
+          <span class="content-link-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="content-link-card" href="announcements.html">
+          <span class="content-link-number">03 / CONNECT</span>
+          <h3>Announcements</h3>
+          <p>Read the latest news and updates from our community.</p>
+          <span class="content-link-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
     <div id="ministries-component"></div>
     <div id="about-component"></div>
     <div id="giving-component"></div>
@@ -30,13 +57,10 @@
   <script src="header.js"></script>
   <script src="hero.js"></script>
   <script src="welcome.js"></script>
-  <script src="sermons.js"></script>
-  <script src="events.js"></script>
   <script src="ministries.js"></script>
   <script src="about.js"></script>
   <script src="giving.js"></script>
   <script src="footer.js"></script>
-  <script type="module" src="announcements.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://www.googleapis.com https://apis.google.com https://www.recaptcha.net https://www.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com; frame-src https://www.google.com https://www.recaptcha.net; object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#1c0b32">
-  <meta name="description" content="King Priest Nation announcement administration.">
+  <meta name="description" content="King Priest Nation event and announcement administration.">
   <meta name="robots" content="noindex, nofollow">
   <title>Admin | King Priest Nation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +23,8 @@
     <section class="admin-panel" id="login-panel" aria-labelledby="login-title">
       <p class="admin-eyebrow">Secure area</p>
       <h1 id="login-title">Admin sign in</h1>
-      <p class="admin-lead">Sign in to manage public announcements.</p>
+      <p class="admin-lead">Sign in to manage public announcements and upcoming events.</p>
+      <p class="admin-login-note">Admin accounts are created in Firebase by the site owner. There is no public sign-up.</p>
       <form id="login-form">
         <label for="login-email">Email address</label>
         <input id="login-email" name="email" type="email" autocomplete="username" required>
@@ -38,35 +40,75 @@
       <div class="dashboard-heading">
         <div>
           <p class="admin-eyebrow">Content management</p>
-          <h1 id="dashboard-title">Announcements</h1>
-          <p class="admin-lead">Create an update, save it as a draft, or publish it to the website.</p>
+          <h1 id="dashboard-title">Site content</h1>
+          <p class="admin-lead">Manage public announcements and upcoming events.</p>
         </div>
         <button class="admin-button admin-button-secondary" id="sign-out" type="button">Sign out</button>
       </div>
 
-      <form class="announcement-form" id="announcement-form">
-        <input id="announcement-id" name="id" type="hidden">
-        <label for="announcement-title">Title</label>
-        <input id="announcement-title" name="title" type="text" maxlength="100" required>
-        <label for="announcement-body">Announcement</label>
-        <textarea id="announcement-body" name="body" rows="6" maxlength="2000" required></textarea>
-        <label class="publish-toggle" for="announcement-published">
-          <input id="announcement-published" name="published" type="checkbox" checked>
-          <span>Publish this announcement on the website</span>
-        </label>
-        <div class="form-actions">
-          <button class="admin-button admin-button-primary" id="save-announcement" type="submit">Publish announcement</button>
-          <button class="admin-button admin-button-secondary" id="cancel-edit" type="button" hidden>Cancel edit</button>
-        </div>
-        <p class="admin-status" id="editor-status" role="status" aria-live="polite"></p>
-      </form>
+      <nav class="content-tabs" aria-label="Content type">
+        <button class="content-tab is-active" type="button" data-panel="announcements-panel" aria-selected="true">Announcements</button>
+        <button class="content-tab" type="button" data-panel="events-panel" aria-selected="false">Events</button>
+      </nav>
 
-      <div class="admin-list-heading">
-        <h2>Saved announcements</h2>
-        <span id="announcement-count"></span>
+      <div class="content-panel" id="announcements-panel">
+        <form class="announcement-form" id="announcement-form">
+          <input id="announcement-id" name="id" type="hidden">
+          <label for="announcement-title">Title</label>
+          <input id="announcement-title" name="title" type="text" maxlength="100" required>
+          <label for="announcement-body">Announcement</label>
+          <textarea id="announcement-body" name="body" rows="6" maxlength="2000" required></textarea>
+          <label class="publish-toggle" for="announcement-published">
+            <input id="announcement-published" name="published" type="checkbox" checked>
+            <span>Publish this announcement on the website</span>
+          </label>
+          <div class="form-actions">
+            <button class="admin-button admin-button-primary" id="save-announcement" type="submit">Publish announcement</button>
+            <button class="admin-button admin-button-secondary" id="cancel-edit" type="button" hidden>Cancel edit</button>
+          </div>
+          <p class="admin-status" id="editor-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="admin-list-heading">
+          <h2>Saved announcements</h2>
+          <span id="announcement-count"></span>
+        </div>
+        <div class="admin-announcement-list" id="admin-announcement-list" aria-live="polite">
+          <p class="admin-empty">Loading announcements…</p>
+        </div>
       </div>
-      <div class="admin-announcement-list" id="admin-announcement-list" aria-live="polite">
-        <p class="admin-empty">Loading announcements…</p>
+
+      <div class="content-panel" id="events-panel" hidden>
+        <form class="announcement-form event-form" id="event-form">
+          <input id="event-id" name="id" type="hidden">
+          <label for="event-title">Event title</label>
+          <input id="event-title" name="title" type="text" maxlength="100" required>
+          <label for="event-description">Description</label>
+          <textarea id="event-description" name="description" rows="4" maxlength="2000" required></textarea>
+          <label for="event-starts-at">Date and time</label>
+          <input id="event-starts-at" name="startsAt" type="datetime-local" required>
+          <label for="event-location">Location</label>
+          <input id="event-location" name="location" type="text" maxlength="120" placeholder="Address or online">
+          <label for="event-meeting-url">Event or meeting link (optional)</label>
+          <input id="event-meeting-url" name="meetingUrl" type="url" maxlength="500" placeholder="https://…">
+          <label class="publish-toggle" for="event-published">
+            <input id="event-published" name="published" type="checkbox" checked>
+            <span>Show this event on the website</span>
+          </label>
+          <div class="form-actions">
+            <button class="admin-button admin-button-primary" id="save-event" type="submit">Publish event</button>
+            <button class="admin-button admin-button-secondary" id="cancel-event-edit" type="button" hidden>Cancel edit</button>
+          </div>
+          <p class="admin-status" id="event-editor-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="admin-list-heading">
+          <h2>Saved events</h2>
+          <span id="event-count"></span>
+        </div>
+        <div class="admin-announcement-list" id="admin-event-list" aria-live="polite">
+          <p class="admin-empty">Loading events…</p>
+        </div>
       </div>
     </section>
   </main>
